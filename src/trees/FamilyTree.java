@@ -145,6 +145,7 @@ public class FamilyTree
 	private void addLine(String line) throws TreeException
 	{
 		// Extract parent and array of children.
+<<<<<<< HEAD
 		int colonIndex = line.indexOf(":");
 		if (colonIndex < 0)
 			throw new TreeException("error, colon not found");
@@ -153,6 +154,19 @@ public class FamilyTree
 		String childrenString = line.substring(colonIndex+1);//?? The substring of line that starts just after colonIndex and goes through the end of
 				                   //the line. You'll use a different version of substring().
 		String[] childrenArray = childrenString.split(",");//?? Call childrenString.split(). Check the API for details. The result will be an array
+=======
+		int colonIndex = line.indexOf(":"); //should be the index of the colon in line.
+		if (colonIndex < 0)
+		{
+			throw new TreeException("Formatting is broken or something check your colon location");
+		}
+			//?? throw a TreeException with a useful message
+		String parent = line.substring(0, colonIndex); //The substring of line that starts at char #0 and ends just before colonIndex. Check the API for 
+		//		           class java.util.String, method substring(), if you need guidance.
+		String childrenString = line.substring(colonIndex); //The substring of line that starts just after colonIndex and goes through the end of
+				                   //the line. You'll use a different version of substring().
+		String[] childrenArray = childrenString.split(childrenString); //Call childrenString.split(). Check the API for details. The result will be an array
+>>>>>>> d1c4cbf19feb6fa175a0407401b9e959c4cd5ea0
 				                    //of strings, with the separating commas thrown away.
 		
 		// Find parent node. If root is null then the tree is empty and the
@@ -160,23 +174,43 @@ public class FamilyTree
 		// somewhere in the tree.
 		TreeNode parentNode;
 		if (root == null)
+		{
 			parentNode = root = new TreeNode(parent);
+		}
+			
 		else
 		{
+<<<<<<< HEAD
 			parentNode = root.getNodeWithName(parent);
 			if(parentNode == null) throw new TreeException("parent does not exist");
 			//There's a method in Node that searches for a named node. 
 			//??? If the parent node wasn't found, there must have been something wrong in the 
 				//data file. Throw an exception.
+=======
+			parentNode = root.getNodeWithName(parent);  //There's a method in Node that searches for a named node. 
+			if (parentNode == null)
+			{
+				throw new TreeException("Parent not found in string");
+			}
+		
+>>>>>>> d1c4cbf19feb6fa175a0407401b9e959c4cd5ea0
 		}
 		
+				//If the parent node wasn't found, there must have been something wrong in the
+				//data file. Throw an exception.
+		
+		
 		// Add child nodes to parentNode.
+<<<<<<< HEAD
 		for(String n: childrenArray) {
 			TreeNode temp = new TreeNode(n);
 			temp.parent = parentNode;
 			parentNode.children.add(temp);
 		}
 		//?? For each name in childrenArray, create a new node and add that node to parentNode.
+=======
+		//For each name in childrenArray, create a new node and add that node to parentNode.
+>>>>>>> d1c4cbf19feb6fa175a0407401b9e959c4cd5ea0
 	}
 	
 	
@@ -189,10 +223,27 @@ public class FamilyTree
 	TreeNode getMostRecentCommonAncestor(String name1, String name2) throws TreeException
 	{
 		// Get nodes for input names.
+<<<<<<< HEAD
 		TreeNode node1 = root.getNodeWithName(name1);		// node whose name is name1
 		if (node1 == null)throw new TreeException ("Node1 not found");
 		TreeNode node2 = root.getNodeWithName(name2);		// node whose name is name2
 		if (node2 == null) throw new TreeException ("Node2 not found");
+=======
+		TreeNode node1 = root.getNodeWithName(name1);// node whose name is name1
+		if (node1 == null)
+		{
+			//??? Throw a TreeException with a useful message
+			throw new TreeException("Your node can't be null");
+		}
+			
+		TreeNode node2 = root.getNodeWithName(name2);		// node whose name is name2
+		if (node2 == null)
+		{
+			//??? Throw TreeException with a useful message
+			throw new TreeException("Your second node can't be null either");
+		}
+			
+>>>>>>> d1c4cbf19feb6fa175a0407401b9e959c4cd5ea0
 		
 		// Get ancestors of node1 and node2.
 		ArrayList<TreeNode> ancestorsOf1 = node1.collectAncestorsToList();
