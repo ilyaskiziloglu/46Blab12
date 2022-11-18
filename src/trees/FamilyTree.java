@@ -16,7 +16,7 @@ public class FamilyTree
         private ArrayList<TreeNode>        children;
         
         
-        TreeNode(String name)
+         TreeNode(String name)
         {
             this.name = name;
             children = new ArrayList<>();
